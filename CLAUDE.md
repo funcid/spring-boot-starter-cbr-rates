@@ -51,14 +51,16 @@ src/test/kotlin/ru/cbr/rates/
 
 ## Configuration Properties
 
-The starter uses `cbr.rates` prefix for configuration:
+The starter uses `cbr.rates` prefix for configuration. All properties have autocomplete support in `application.properties`:
 
 - `cbr.rates.enabled` - Enable/disable the starter (default: true)
-- `cbr.rates.baseUrl` - CBR API base URL (default: https://www.cbr.ru/scripts)
-- `cbr.rates.connectTimeout` - Connection timeout in milliseconds (default: 5000)
-- `cbr.rates.readTimeout` - Read timeout in milliseconds (default: 10000)
-- `cbr.rates.cacheEnabled` - Enable caching (default: true)
-- `cbr.rates.cacheTtlMinutes` - Cache TTL in minutes (default: 60)
+- `cbr.rates.base-url` - CBR API base URL (default: https://www.cbr.ru/scripts)
+- `cbr.rates.connect-timeout` - Connection timeout in milliseconds (default: 5000)
+- `cbr.rates.read-timeout` - Read timeout in milliseconds (default: 10000)
+- `cbr.rates.cache-enabled` - Enable caching (default: true)
+- `cbr.rates.cache-ttl-minutes` - Cache TTL in minutes (default: 60)
+
+**Configuration metadata**: `src/main/resources/META-INF/spring-configuration-metadata.json` provides IDE autocomplete support.
 
 ## Usage
 

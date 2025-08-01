@@ -1,0 +1,113 @@
+{
+  "groups": [
+    {
+      "name": "cbr.rates",
+      "type": "ru.cbr.rates.config.CbrRatesProperties",
+      "description": "Настройки для интеграции с API Центрального банка России для получения курсов валют"
+    }
+  ],
+  "properties": [
+    {
+      "name": "cbr.rates.enabled",
+      "type": "java.lang.Boolean",
+      "defaultValue": true,
+      "description": "Включить/выключить автоконфигурацию CBR Rates стартера"
+    },
+    {
+      "name": "cbr.rates.base-url",
+      "type": "java.lang.String",
+      "defaultValue": "https://www.cbr.ru/scripts",
+      "description": "Базовый URL для API Центрального банка России"
+    },
+    {
+      "name": "cbr.rates.connect-timeout",
+      "type": "java.lang.Integer",
+      "defaultValue": 5000,
+      "description": "Таймаут подключения к API CBR в миллисекундах"
+    },
+    {
+      "name": "cbr.rates.read-timeout",
+      "type": "java.lang.Integer",
+      "defaultValue": 10000,
+      "description": "Таймаут чтения ответа от API CBR в миллисекундах"
+    },
+    {
+      "name": "cbr.rates.cache-enabled",
+      "type": "java.lang.Boolean",
+      "defaultValue": true,
+      "description": "Включить кэширование курсов валют"
+    },
+    {
+      "name": "cbr.rates.cache-ttl-minutes",
+      "type": "java.lang.Integer",
+      "defaultValue": 60,
+      "description": "Время жизни кэша курсов валют в минутах"
+    }
+  ],
+  "hints": [
+    {
+      "name": "cbr.rates.base-url",
+      "values": [
+        {
+          "value": "https://www.cbr.ru/scripts",
+          "description": "Официальный API ЦБ РФ (по умолчанию)"
+        }
+      ]
+    },
+    {
+      "name": "cbr.rates.connect-timeout",
+      "values": [
+        {
+          "value": 5000,
+          "description": "5 секунд (рекомендуется)"
+        },
+        {
+          "value": 3000,
+          "description": "3 секунды (быстрая сеть)"
+        },
+        {
+          "value": 10000,
+          "description": "10 секунд (медленная сеть)"
+        }
+      ]
+    },
+    {
+      "name": "cbr.rates.read-timeout",
+      "values": [
+        {
+          "value": 10000,
+          "description": "10 секунд (рекомендуется)"
+        },
+        {
+          "value": 5000,
+          "description": "5 секунд (быстрая сеть)"
+        },
+        {
+          "value": 15000,
+          "description": "15 секунд (медленная сеть)"
+        }
+      ]
+    },
+    {
+      "name": "cbr.rates.cache-ttl-minutes",
+      "values": [
+        {
+          "value": 60,
+          "description": "1 час (рекомендуется)"
+        },
+        {
+          "value": 30,
+          "description": "30 минут"
+        },
+        {
+          "value": 120,
+          "description": "2 часа"
+        },
+        {
+          "value": 1440,
+          "description": "24 часа"
+        }
+      ]
+    }
+  ]
+}
