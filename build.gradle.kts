@@ -1,71 +1,94 @@
 plugins {
-    kotlin("jvm") version "1.9.25"
-    kotlin("plugin.spring") version "1.9.25"
-    id("org.springframework.boot") version "3.3.2"
-    id("io.spring.dependency-management") version "1.1.6"
-    `maven-publish`
+  alias(libs.plugins.kotlin.jvm)
+  alias(libs.plugins.kotlin.spring)
+  alias(libs.plugins.spring.boot)
+  alias(libs.plugins.spring.dependency.management)
+  alias(libs.plugins.ktlint)
+  `maven-publish`
 }
 
-group = "ru.cbr"
+group = "me.func"
 version = "0.0.1-SNAPSHOT"
+description = "cbr"
 
 java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
-    }
+  toolchain {
+    languageVersion.set(JavaLanguageVersion.of(libs.versions.java.get().toInt()))
+  }
 }
 
 repositories {
-    mavenCentral()
+  mavenCentral()
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter")
-    implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.boot:spring-boot-configuration-processor")
-    implementation("org.jetbrains.kotlin:kotlin-reflect")
+  // Spring
+  implementation(libs.spring.boot.starter)
+  implementation(libs.spring.boot.starter.web)
+  implementation(libs.spring.boot.starter.configuration.processor)
+  implementation(libs.spring.boot.starter.logging)
+  implementation(libs.spring.boot.starter.actuator)
 
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
-    testImplementation("org.mockito.kotlin:mockito-kotlin:5.1.0")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+  // Kotlin
+  implementation(libs.jackson.module.kotlin)
+  implementation(libs.kotlin.reflect)
+  implementation(libs.kotlinx.coroutines.core)
+  implementation(libs.kotlin.logging.jvm)
+
+  // Tests
+  testImplementation(libs.spring.boot.starter.test)
+  testImplementation(libs.kotlin.test.junit5)
+  testImplementation(libs.mockito.kotlin)
+  testRuntimeOnly(libs.junit.platform.launcher)
 }
 
 kotlin {
-    compilerOptions {
-        freeCompilerArgs.addAll("-Xjsr305=strict")
-    }
+  compilerOptions {
+    freeCompilerArgs.addAll("-Xjsr305=strict")
+  }
+  jvmToolchain(libs.versions.java.get().toInt())
 }
 
 tasks.withType<Test> {
-    useJUnitPlatform()
+  useJUnitPlatform()
 }
 
 tasks.bootJar {
-    enabled = false
+  enabled = false
 }
 
 tasks.jar {
-    enabled = true
-    archiveClassifier = ""
+  enabled = true
+  archiveClassifier = ""
 }
 
+ktlint {
+  android.set(false)
+  outputToConsole.set(true)
+  ignoreFailures.set(false)
+  filter {
+    exclude("**/generated/**", "**/*.kts")
+    include("**/kotlin/**")
+  }
+}
+
+
 publishing {
-    publications {
-        create<MavenPublication>("maven") {
-            from(components["java"])
+  publications {
+    create<MavenPublication>("maven") {
+      from(components["java"])
 
-            pom {
-                name.set("Spring Boot Starter CBR Rates")
-                description.set("Spring Boot starter for Central Bank of Russia exchange rates integration")
+      pom {
+        name.set("Spring Boot Starter CBR Rates")
+        description.set("Spring Boot starter for Central Bank of Russia exchange rates integration")
 
-                developers {
-                    developer {
-                        name.set("CBR Team")
-                        organization.set("Central Bank of Russia")
-                    }
-                }
-            }
+        developers {
+          developer {
+            name.set("CBR Team")
+            organization.set("Central Bank of Russia")
+          }
         }
+      }
     }
+  }
 }

@@ -16,24 +16,21 @@ import java.time.Duration
 @ConditionalOnProperty(prefix = "cbr.rates", name = ["enabled"], havingValue = "true", matchIfMissing = true)
 @EnableConfigurationProperties(CbrRatesProperties::class)
 class CbrRatesAutoConfiguration {
-
-    @Bean
-    @ConditionalOnMissingBean
-    fun cbrRatesRestTemplate(properties: CbrRatesProperties): RestTemplate {
-        return RestTemplate().apply {
-            requestFactory = org.springframework.http.client.SimpleClientHttpRequestFactory().apply {
-                setConnectTimeout(Duration.ofMillis(properties.connectTimeout))
-                setReadTimeout(Duration.ofMillis(properties.readTimeout))
-            }
+  @Bean
+  @ConditionalOnMissingBean
+  fun cbrRatesRestTemplate(properties: CbrRatesProperties): RestTemplate =
+    RestTemplate().apply {
+      requestFactory =
+        org.springframework.http.client.SimpleClientHttpRequestFactory().apply {
+          setConnectTimeout(Duration.ofMillis(properties.connectTimeout))
+          setReadTimeout(Duration.ofMillis(properties.readTimeout))
         }
     }
 
-    @Bean
-    @ConditionalOnMissingBean
-    fun cbrRatesClient(
-        cbrRatesRestTemplate: RestTemplate,
-        properties: CbrRatesProperties
-    ): CbrRatesClient {
-        return CbrRatesClient(cbrRatesRestTemplate, properties)
-    }
+  @Bean
+  @ConditionalOnMissingBean
+  fun cbrRatesClient(
+    cbrRatesRestTemplate: RestTemplate,
+    properties: CbrRatesProperties,
+  ): CbrRatesClient = CbrRatesClient(cbrRatesRestTemplate, properties)
 }
