@@ -1,44 +1,44 @@
 {
   "groups": [
     {
-      "name": "cbr.rates",
-      "type": "ru.cbr.rates.config.CbrRatesProperties",
+      "name": "cbr.adapter",
+      "type": "ru.cbr.adapter.config.CbrProperties",
       "description": "Настройки для интеграции с API Центрального банка России для получения курсов валют"
     }
   ],
   "properties": [
     {
-      "name": "cbr.rates.enabled",
+      "name": "cbr.adapter.enabled",
       "type": "java.lang.Boolean",
       "defaultValue": true,
       "description": "Включить/выключить автоконфигурацию CBR Rates стартера"
     },
     {
-      "name": "cbr.rates.base-url",
+      "name": "cbr.adapter.base-url",
       "type": "java.lang.String",
       "defaultValue": "https://www.cbr.ru/scripts",
       "description": "Базовый URL для API Центрального банка России"
     },
     {
-      "name": "cbr.rates.connect-timeout",
+      "name": "cbr.adapter.connect-timeout",
       "type": "java.lang.Integer",
       "defaultValue": 5000,
       "description": "Таймаут подключения к API CBR в миллисекундах"
     },
     {
-      "name": "cbr.rates.read-timeout",
+      "name": "cbr.adapter.read-timeout",
       "type": "java.lang.Integer",
       "defaultValue": 10000,
       "description": "Таймаут чтения ответа от API CBR в миллисекундах"
     },
     {
-      "name": "cbr.rates.cache-enabled",
+      "name": "cbr.adapter.cache-enabled",
       "type": "java.lang.Boolean",
       "defaultValue": true,
       "description": "Включить кэширование курсов валют"
     },
     {
-      "name": "cbr.rates.cache-ttl-minutes",
+      "name": "cbr.adapter.cache-ttl-minutes",
       "type": "java.lang.Integer",
       "defaultValue": 60,
       "description": "Время жизни кэша курсов валют в минутах"
@@ -46,7 +46,7 @@
   ],
   "hints": [
     {
-      "name": "cbr.rates.base-url",
+      "name": "cbr.adapter.base-url",
       "values": [
         {
           "value": "https://www.cbr.ru/scripts",
@@ -55,7 +55,7 @@
       ]
     },
     {
-      "name": "cbr.rates.connect-timeout",
+      "name": "cbr.adapter.connect-timeout",
       "values": [
         {
           "value": 5000,
@@ -72,7 +72,7 @@
       ]
     },
     {
-      "name": "cbr.rates.read-timeout",
+      "name": "cbr.adapter.read-timeout",
       "values": [
         {
           "value": 10000,
@@ -89,7 +89,7 @@
       ]
     },
     {
-      "name": "cbr.rates.cache-ttl-minutes",
+      "name": "cbr.adapter.cache-ttl-minutes",
       "values": [
         {
           "value": 60,

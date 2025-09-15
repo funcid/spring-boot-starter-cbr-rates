@@ -1,4 +1,4 @@
-package ru.cbr.rates.client
+package ru.cbr.adapter.client
 
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Disabled
@@ -10,9 +10,9 @@ import org.mockito.kotlin.whenever
 import org.springframework.http.HttpMethod
 import org.springframework.http.ResponseEntity
 import org.springframework.web.client.RestTemplate
-import ru.cbr.rates.config.CbrRatesProperties
-import ru.cbr.rates.model.CharsetConstants.UTF_8
-import ru.cbr.rates.model.CharsetConstants.WINDOWS_1251
+import ru.cbr.adapter.config.CbrProperties
+import ru.cbr.adapter.model.CharsetConstants.UTF_8
+import ru.cbr.adapter.model.CharsetConstants.WINDOWS_1251
 import java.time.LocalDate
 import java.util.Currency
 import kotlin.test.assertEquals
@@ -834,13 +834,13 @@ private val TEST_XML_CURRENCY_LIST =
 
 class CbrRatesClientTest {
   private lateinit var restTemplate: RestTemplate
-  private lateinit var properties: CbrRatesProperties
+  private lateinit var properties: CbrProperties
   private lateinit var client: CbrRatesClient
 
   @BeforeEach
   fun setup() {
     restTemplate = mock()
-    properties = CbrRatesProperties(baseUrl = "https://www.cbr.ru/scripts")
+    properties = CbrProperties(baseUrl = "https://www.cbr.ru/scripts")
     client = CbrRatesClient(restTemplate, properties)
   }
 
@@ -926,7 +926,7 @@ class CbrRatesClientTest {
   fun `should connect to real CBR service and fetch current rates`() {
     // This test uses real RestTemplate to connect to CBR API
     val realRestTemplate = RestTemplate()
-    val realProperties = CbrRatesProperties(baseUrl = "https://www.cbr.ru/scripts")
+    val realProperties = CbrProperties(baseUrl = "https://www.cbr.ru/scripts")
     val realClient = CbrRatesClient(realRestTemplate, realProperties)
 
     // Test getting current rates
