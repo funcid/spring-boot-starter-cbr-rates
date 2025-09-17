@@ -12,6 +12,7 @@ import java.time.format.DateTimeFormatter
 import javax.xml.parsers.DocumentBuilderFactory
 import org.springframework.stereotype.Service
 import ru.cbr.adapter.model.BankBic
+import ru.cbr.adapter.model.Metal
 
 @Service
 class XmlParser {
@@ -63,6 +64,21 @@ class XmlParser {
     return CurrencyList(name, currencies)
   }
 
+  fun parseMetalList(xml: String): Collection<Metal> {
+    val document = documentBuilder.parse(xml.byteInputStream(WINDOWS_1251))
+    val root = document.documentElement
+
+    val metals = mutableListOf<Metal>()
+    val itemNodes = root.getElementsByTagName("Record")
+
+    for (i in 0 until itemNodes.length) {
+      val item = itemNodes.item(i) as Element
+      metals.add(parseMetal(item))
+    }
+
+    return metals
+  }
+
   fun parseBankBicList(xml: String): Collection<BankBic> {
     val document = documentBuilder.parse(xml.byteInputStream(WINDOWS_1251))
     val root = document.documentElement
@@ -77,6 +93,14 @@ class XmlParser {
 
     return bankBics
   }
+
+  private fun parseMetal(item: Element): Metal =
+    Metal(
+      date = LocalDate.parse(item.getAttribute("Date"), dateFormatter),
+      code = getElementText(item, "Code"),
+      buy = parseDecimal(getElementText(item, "Buy")),
+      sell = parseDecimal(getElementText(item, "Sell")),
+    )
 
   private fun parseBankBic(item: Element): BankBic =
     BankBic(
