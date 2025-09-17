@@ -1,9 +1,9 @@
-package ru.cbr.rates.config
+package ru.cbr.adapter.config
 
 import org.springframework.boot.context.properties.ConfigurationProperties
 
-@ConfigurationProperties(prefix = "cbr.rates")
-data class CbrRatesProperties(
+@ConfigurationProperties(prefix = "cbr.adapter")
+data class CbrProperties(
   val baseUrl: String = "https://www.cbr.ru/scripts",
   val connectTimeout: Long = 5000,
   val readTimeout: Long = 10000,

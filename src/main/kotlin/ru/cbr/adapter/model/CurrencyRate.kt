@@ -1,4 +1,4 @@
-package ru.cbr.rates.model
+package ru.cbr.adapter.model
 
 import java.math.BigDecimal
 import java.time.LocalDate
