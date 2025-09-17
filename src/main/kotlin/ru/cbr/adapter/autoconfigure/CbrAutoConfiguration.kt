@@ -43,7 +43,7 @@ class CbrAutoConfiguration {
     xmlParser: XmlParser
   ): CbrRatesClient = CbrRatesClient(cbrRestTemplate, properties, xmlParser)
 
-  @Bean
+  @Bean("bankBicClient")
   @ConditionalOnMissingBean
   fun cbrBankBicClient(
     cbrRestTemplate: RestTemplate,
