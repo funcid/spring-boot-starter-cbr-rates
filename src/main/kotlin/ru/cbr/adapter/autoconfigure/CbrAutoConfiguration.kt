@@ -19,7 +19,7 @@ import java.time.Duration
 @ConditionalOnClass(RestTemplate::class)
 @ConditionalOnProperty(prefix = "cbr.adapter", name = ["enabled"], havingValue = "true", matchIfMissing = true)
 @EnableConfigurationProperties(CbrProperties::class)
-class CbrRatesAutoConfiguration {
+class CbrAutoConfiguration {
   @Bean
   @ConditionalOnMissingBean
   fun cbrRestTemplate(properties: CbrProperties): RestTemplate =
@@ -51,7 +51,7 @@ class CbrRatesAutoConfiguration {
     xmlParser: XmlParser
   ): CbrBankBicClient = CbrBankBicClient(cbrRestTemplate, properties, xmlParser)
 
-  @Bean
+  @Bean("metalsCbrClient")
   @ConditionalOnMissingBean
   fun cbrMetalClient(
     cbrRestTemplate: RestTemplate,
