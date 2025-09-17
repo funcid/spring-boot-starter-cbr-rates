@@ -7,11 +7,13 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
 import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.web.client.RestTemplate
+import ru.cbr.adapter.client.CbrBankBicClient
+import ru.cbr.adapter.client.CbrInterbankCreditMarketClient
+import ru.cbr.adapter.client.CbrMetalClient
 import ru.cbr.adapter.client.CbrRatesClient
 import ru.cbr.adapter.config.CbrProperties
-import java.time.Duration
-import ru.cbr.adapter.client.CbrBankBicClient
 import ru.cbr.adapter.parser.XmlParser
+import java.time.Duration
 
 @AutoConfiguration
 @ConditionalOnClass(RestTemplate::class)
@@ -48,4 +50,21 @@ class CbrRatesAutoConfiguration {
     properties: CbrProperties,
     xmlParser: XmlParser
   ): CbrBankBicClient = CbrBankBicClient(cbrRestTemplate, properties, xmlParser)
+
+  @Bean
+  @ConditionalOnMissingBean
+  fun cbrMetalClient(
+    cbrRestTemplate: RestTemplate,
+    properties: CbrProperties,
+    xmlParser: XmlParser
+  ): CbrMetalClient = CbrMetalClient(cbrRestTemplate, properties, xmlParser)
+
+  @Bean
+  @ConditionalOnMissingBean
+  fun cbrInterbankCreditMarketClient(
+    cbrRestTemplate: RestTemplate,
+    properties: CbrProperties,
+    xmlParser: XmlParser
+  ): CbrInterbankCreditMarketClient =
+    CbrInterbankCreditMarketClient(cbrRestTemplate, properties, xmlParser)
 }
