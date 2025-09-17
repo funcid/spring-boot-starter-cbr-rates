@@ -12,6 +12,7 @@ import java.time.format.DateTimeFormatter
 import javax.xml.parsers.DocumentBuilderFactory
 import org.springframework.stereotype.Service
 import ru.cbr.adapter.model.BankBic
+import ru.cbr.adapter.model.InterbankCreditMarket
 import ru.cbr.adapter.model.Metal
 
 @Service
@@ -79,6 +80,24 @@ class XmlParser {
     return metals
   }
 
+  fun parseInterbankCreditMarket(xml: String): Collection<InterbankCreditMarket> {
+    val document = documentBuilder.parse(xml.byteInputStream(WINDOWS_1251))
+    val root = document.documentElement
+
+    val interbankCreditMarkets = mutableListOf<InterbankCreditMarket>()
+    val itemNodes = root.getElementsByTagName("Record")
+
+    for (i in 0 until itemNodes.length) {
+      val item = itemNodes.item(i) as Element
+      val code = item.getAttribute("Code")
+      if (code == "3") {
+        interbankCreditMarkets.add(parseInterbankCreditMarket(item))
+      }
+    }
+
+    return interbankCreditMarkets
+  }
+
   fun parseBankBicList(xml: String): Collection<BankBic> {
     val document = documentBuilder.parse(xml.byteInputStream(WINDOWS_1251))
     val root = document.documentElement
@@ -93,6 +112,18 @@ class XmlParser {
 
     return bankBics
   }
+
+  private fun parseInterbankCreditMarket(item: Element): InterbankCreditMarket =
+    InterbankCreditMarket(
+      date = LocalDate.parse(item.getAttribute("Date"), dateFormatter),
+      code = item.getAttribute("Code"),
+      c1 = parseDecimal(getElementText(item, "C1")),
+      c7 = parseDecimalOrNull(getElementText(item, "C7")),
+      c30 = parseDecimalOrNull(getElementText(item, "C30")),
+      c90 = parseDecimalOrNull(getElementText(item, "C90")),
+      c180 = parseDecimalOrNull(getElementText(item, "C180")),
+      c360 = parseDecimalOrNull(getElementText(item, "C360")),
+    )
 
   private fun parseMetal(item: Element): Metal =
     Metal(
@@ -134,4 +165,12 @@ class XmlParser {
   }
 
   private fun parseDecimal(value: String): BigDecimal = BigDecimal(value.replace(",", "."))
+  
+  private fun parseDecimalOrNull(value: String): BigDecimal? {
+    return if (value == "-" || value.isEmpty()) {
+      null
+    } else {
+      BigDecimal(value.replace(",", "."))
+    }
+  }
 }
