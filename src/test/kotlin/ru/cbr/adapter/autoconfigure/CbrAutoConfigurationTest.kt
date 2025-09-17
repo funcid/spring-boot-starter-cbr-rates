@@ -9,10 +9,10 @@ import ru.cbr.adapter.config.CbrProperties
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 
-class CbrRatesAutoConfigurationTest {
+class CbrAutoConfigurationTest {
   private val contextRunner =
     ApplicationContextRunner()
-      .withConfiguration(AutoConfigurations.of(CbrRatesAutoConfiguration::class.java))
+      .withConfiguration(AutoConfigurations.of(CbrAutoConfiguration::class.java))
 
   @Test
   fun `should create CBR rates client bean when auto-configuration is enabled`() {
