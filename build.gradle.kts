@@ -24,19 +24,22 @@ repositories {
 dependencies {
   // Spring
   implementation(libs.spring.boot.starter)
-  implementation(libs.spring.boot.starter.web)
+  implementation(libs.spring.boot.starter.webflux)
   implementation(libs.spring.boot.starter.configuration.processor)
   implementation(libs.spring.boot.starter.logging)
   implementation(libs.spring.boot.starter.actuator)
 
-  // Kotlin
+  // Kotlin / Reactor
   implementation(libs.jackson.module.kotlin)
+  implementation(libs.reactor.kotlin.extensions)
   implementation(libs.kotlin.reflect)
   implementation(libs.kotlinx.coroutines.core)
+  implementation(libs.kotlinx.coroutines.reactor)
   implementation(libs.kotlin.logging.jvm)
 
   // Tests
   testImplementation(libs.spring.boot.starter.test)
+  testImplementation(libs.reactor.test)
   testImplementation(libs.kotlin.test.junit5)
   testImplementation(libs.mockito.kotlin)
   testRuntimeOnly(libs.junit.platform.launcher)

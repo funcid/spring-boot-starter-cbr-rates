@@ -1,12 +1,12 @@
 package ru.cbr.adapter.util
 
-import java.time.LocalDate
 import org.springframework.http.HttpEntity
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpMethod
 import org.springframework.http.MediaType
 import org.springframework.web.client.RestTemplate
 import ru.cbr.adapter.model.CharsetConstants.WINDOWS_1251
+import java.time.LocalDate
 
 fun RestTemplate.fetchXmlWithCorrectEncoding(url: String): String {
   val headers = HttpHeaders()

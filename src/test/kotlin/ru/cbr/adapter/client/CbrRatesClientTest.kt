@@ -13,6 +13,8 @@ import org.springframework.web.client.RestTemplate
 import ru.cbr.adapter.config.CbrProperties
 import ru.cbr.adapter.model.CharsetConstants.UTF_8
 import ru.cbr.adapter.model.CharsetConstants.WINDOWS_1251
+import ru.cbr.adapter.parser.CurrencyListParser
+import ru.cbr.adapter.parser.ExchangeRatesParser
 import java.time.LocalDate
 import java.util.Currency
 import kotlin.test.assertEquals
@@ -836,12 +838,16 @@ class CbrRatesClientTest {
   private lateinit var restTemplate: RestTemplate
   private lateinit var properties: CbrProperties
   private lateinit var client: CbrRatesClient
+  private lateinit var exchangeRatesParser: ExchangeRatesParser
+  private lateinit var currencyListParser: CurrencyListParser
 
   @BeforeEach
   fun setup() {
     restTemplate = mock()
     properties = CbrProperties(baseUrl = "https://www.cbr.ru/scripts")
-    client = CbrRatesClient(restTemplate, properties)
+    exchangeRatesParser = ExchangeRatesParser()
+    currencyListParser = CurrencyListParser()
+    client = CbrRatesClient(restTemplate, properties, exchangeRatesParser, currencyListParser)
   }
 
   @Test
@@ -927,7 +933,7 @@ class CbrRatesClientTest {
     // This test uses real RestTemplate to connect to CBR API
     val realRestTemplate = RestTemplate()
     val realProperties = CbrProperties(baseUrl = "https://www.cbr.ru/scripts")
-    val realClient = CbrRatesClient(realRestTemplate, realProperties)
+    val realClient = CbrRatesClient(realRestTemplate, realProperties, exchangeRatesParser, currencyListParser)
 
     // Test getting current rates
     val rates = realClient.getCurrentRates()

@@ -12,7 +12,11 @@ import ru.cbr.adapter.client.CbrInterbankCreditMarketClient
 import ru.cbr.adapter.client.CbrMetalClient
 import ru.cbr.adapter.client.CbrRatesClient
 import ru.cbr.adapter.config.CbrProperties
-import ru.cbr.adapter.parser.XmlParser
+import ru.cbr.adapter.parser.BankBicParser
+import ru.cbr.adapter.parser.CurrencyListParser
+import ru.cbr.adapter.parser.ExchangeRatesParser
+import ru.cbr.adapter.parser.InterbankCreditMarketParser
+import ru.cbr.adapter.parser.MetalParser
 import java.time.Duration
 
 @AutoConfiguration
@@ -33,38 +37,75 @@ class CbrAutoConfiguration {
 
   @Bean
   @ConditionalOnMissingBean
-  fun ratesXmlParser() = XmlParser()
+  fun bankBicParser() = BankBicParser()
+
+  @Bean
+  @ConditionalOnMissingBean
+  fun currencyListParser() = CurrencyListParser()
+
+  @Bean
+  @ConditionalOnMissingBean
+  fun exchangeRatesParser() = ExchangeRatesParser()
+
+  @Bean
+  @ConditionalOnMissingBean
+  fun interbankCreditMarketParser() = InterbankCreditMarketParser()
+
+  @Bean
+  @ConditionalOnMissingBean
+  fun metalParser() = MetalParser()
 
   @Bean
   @ConditionalOnMissingBean
   fun cbrRatesClient(
     cbrRestTemplate: RestTemplate,
     properties: CbrProperties,
-    xmlParser: XmlParser
-  ): CbrRatesClient = CbrRatesClient(cbrRestTemplate, properties, xmlParser)
+    exchangeRatesParser: ExchangeRatesParser,
+    currencyListParser: CurrencyListParser,
+  ): CbrRatesClient =
+    CbrRatesClient(
+      cbrRestTemplate,
+      properties,
+      exchangeRatesParser,
+      currencyListParser,
+    )
 
   @Bean("bankBicClient")
   @ConditionalOnMissingBean
   fun cbrBankBicClient(
     cbrRestTemplate: RestTemplate,
     properties: CbrProperties,
-    xmlParser: XmlParser
-  ): CbrBankBicClient = CbrBankBicClient(cbrRestTemplate, properties, xmlParser)
+    bankBicParser: BankBicParser,
+  ): CbrBankBicClient =
+    CbrBankBicClient(
+      cbrRestTemplate,
+      properties,
+      bankBicParser,
+    )
 
   @Bean("metalsCbrClient")
   @ConditionalOnMissingBean
   fun cbrMetalClient(
     cbrRestTemplate: RestTemplate,
     properties: CbrProperties,
-    xmlParser: XmlParser
-  ): CbrMetalClient = CbrMetalClient(cbrRestTemplate, properties, xmlParser)
+    metalParser: MetalParser,
+  ): CbrMetalClient =
+    CbrMetalClient(
+      cbrRestTemplate,
+      properties,
+      metalParser,
+    )
 
   @Bean
   @ConditionalOnMissingBean
   fun cbrInterbankCreditMarketClient(
     cbrRestTemplate: RestTemplate,
     properties: CbrProperties,
-    xmlParser: XmlParser
+    interbankCreditMarketParser: InterbankCreditMarketParser,
   ): CbrInterbankCreditMarketClient =
-    CbrInterbankCreditMarketClient(cbrRestTemplate, properties, xmlParser)
+    CbrInterbankCreditMarketClient(
+      cbrRestTemplate,
+      properties,
+      interbankCreditMarketParser,
+    )
 }
