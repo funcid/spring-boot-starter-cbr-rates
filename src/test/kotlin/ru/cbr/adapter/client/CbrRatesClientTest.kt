@@ -1,7 +1,6 @@
 package ru.cbr.adapter.client
 
 import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.mockito.kotlin.any
 import org.mockito.kotlin.eq
@@ -928,7 +927,6 @@ class CbrRatesClientTest {
   }
 
   @Test
-  @Disabled("Integration test - connects to real CBR service")
   fun `should connect to real CBR service and fetch current rates`() {
     // This test uses real RestTemplate to connect to CBR API
     val realRestTemplate = RestTemplate()

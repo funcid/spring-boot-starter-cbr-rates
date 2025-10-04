@@ -26,7 +26,7 @@ class CbrAutoConfigurationTest {
   @Test
   fun `should not create CBR rates client when disabled`() {
     contextRunner
-      .withPropertyValues("cbr.rates.enabled=false")
+      .withPropertyValues("cbr.adapter.enabled=false")
       .run { context ->
         assert(!context.containsBean("cbrRatesClient"))
       }
@@ -48,11 +48,11 @@ class CbrAutoConfigurationTest {
   fun `should configure properties with custom values`() {
     contextRunner
       .withPropertyValues(
-        "cbr.rates.baseUrl=https://custom.cbr.ru",
-        "cbr.rates.connectTimeout=3000",
-        "cbr.rates.readTimeout=15000",
-        "cbr.rates.cacheEnabled=false",
-        "cbr.rates.cacheTtlMinutes=30",
+        "cbr.adapter.base-url=https://custom.cbr.ru",
+        "cbr.adapter.connect-timeout=3000",
+        "cbr.adapter.read-timeout=15000",
+        "cbr.adapter.cache-enabled=false",
+        "cbr.adapter.cache-ttl-minutes=30",
       ).run { context ->
         val properties = context.getBean(CbrProperties::class.java)
         assertEquals("https://custom.cbr.ru", properties.baseUrl)
