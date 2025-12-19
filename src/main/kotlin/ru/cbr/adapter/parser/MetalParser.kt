@@ -37,7 +37,7 @@ class MetalParser : AbstractXmlParser() {
   private fun parseMetal(item: Element): Metal =
     Metal(
       date = parseDate(item.getAttribute("Date")),
-      code = getElementText(item, "Code"),
+      code = item.getAttribute("Code"),
       buy = parseDecimal(getElementText(item, "Buy")),
       sell = parseDecimal(getElementText(item, "Sell")),
     )
