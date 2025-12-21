@@ -19,7 +19,7 @@ class MetalParser : AbstractXmlParser() {
     val document = parseXmlDocument(xml)
     val root = document.documentElement
 
-    return parseMetalItems(root)
+    return parseMetalItems(root).sortedByDescending { it.date }.distinctBy { it.code }
   }
 
   private fun parseMetalItems(root: Element): List<Metal> {

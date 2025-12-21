@@ -17,10 +17,11 @@ class CbrMetalClient(
    * Получить полный список металлов
    */
   fun getMetalList(): Collection<Metal> {
-    val formatDate = formatDate(LocalDate.now())
+    val from = formatDate(LocalDate.now().minusDays(1))
+    val to = formatDate(LocalDate.now())
     return metalParser.parseMetalList(
       restTemplate.fetchXmlWithCorrectEncoding(
-        url = "${properties.baseUrl}/xml_metall.asp?date_req1=$formatDate&date_req2=$formatDate",
+        url = "${properties.baseUrl}/xml_metall.asp?date_req1=$from&date_req2=$to",
       ),
     )
   }
