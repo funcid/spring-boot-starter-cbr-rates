@@ -20,7 +20,7 @@ class MetalParser : AbstractXmlParser() {
     val root = document.documentElement
 
     val allMetals = parseMetalItems(root)
-    
+
     return allMetals
       .groupBy { it.code }
       .mapValues { (_, metals) -> metals.maxByOrNull { it.date } }
