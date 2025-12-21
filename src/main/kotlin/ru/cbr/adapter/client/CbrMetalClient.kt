@@ -17,7 +17,7 @@ class CbrMetalClient(
    * Получить полный список металлов
    */
   fun getMetalList(): Collection<Metal> {
-    val from = formatDate(LocalDate.now().minusDays(1))
+    val from = formatDate(LocalDate.now().minusDays(3))
     val to = formatDate(LocalDate.now())
     return metalParser.parseMetalList(
       restTemplate.fetchXmlWithCorrectEncoding(
