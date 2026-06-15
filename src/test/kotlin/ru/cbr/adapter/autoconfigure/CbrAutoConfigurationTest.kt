@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.AutoConfigurations
 import org.springframework.boot.test.context.runner.ApplicationContextRunner
 import org.springframework.web.client.RestTemplate
 import ru.cbr.adapter.client.CbrRatesClient
-import ru.cbr.adapter.config.CbrProperties
+import ru.cbr.adapter.configuration.CbrProperties
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 

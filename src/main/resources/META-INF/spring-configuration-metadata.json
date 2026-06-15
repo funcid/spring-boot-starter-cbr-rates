@@ -2,7 +2,7 @@
   "groups": [
     {
       "name": "cbr.adapter",
-      "type": "ru.cbr.adapter.config.CbrProperties",
+      "type": "ru.cbr.adapter.configuration.CbrProperties",
       "description": "Настройки для интеграции с API Центрального банка России для получения курсов валют"
     }
   ],

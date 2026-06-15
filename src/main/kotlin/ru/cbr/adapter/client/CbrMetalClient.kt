@@ -1,7 +1,7 @@
 package ru.cbr.adapter.client
 
 import org.springframework.web.client.RestTemplate
-import ru.cbr.adapter.config.CbrProperties
+import ru.cbr.adapter.configuration.CbrProperties
 import ru.cbr.adapter.model.Metal
 import ru.cbr.adapter.parser.MetalParser
 import ru.cbr.adapter.util.fetchXmlWithCorrectEncoding

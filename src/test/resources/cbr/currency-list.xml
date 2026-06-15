@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<CurrencyList name="Foreign Currency List">
+  <Item ID="R01035">
+    <Name>Фунт стерлингов</Name>
+    <EngName>Pound Sterling</EngName>
+    <Nominal>1</Nominal>
+    <ParentCode>0</ParentCode>
+    <ISO_Num_Code>826</ISO_Num_Code>
+    <ISO_Char_Code>GBP</ISO_Char_Code>
+  </Item>
+</CurrencyList>

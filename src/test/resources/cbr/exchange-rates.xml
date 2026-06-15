@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<ValCurs Date="02.03.2002" name="Foreign Currency Market">
+  <Valute ID="R01235">
+    <NumCode>840</NumCode>
+    <CharCode>USD</CharCode>
+    <Nominal>1</Nominal>
+    <Name>Доллар США</Name>
+    <Value>30,9436</Value>
+    <VunitRate>30,9436</VunitRate>
+  </Valute>
+</ValCurs>

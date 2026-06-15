@@ -9,7 +9,7 @@ import org.mockito.kotlin.whenever
 import org.springframework.http.HttpMethod
 import org.springframework.http.ResponseEntity
 import org.springframework.web.client.RestTemplate
-import ru.cbr.adapter.config.CbrProperties
+import ru.cbr.adapter.configuration.CbrProperties
 import ru.cbr.adapter.model.CharsetConstants.UTF_8
 import ru.cbr.adapter.model.CharsetConstants.WINDOWS_1251
 import ru.cbr.adapter.parser.CurrencyListParser

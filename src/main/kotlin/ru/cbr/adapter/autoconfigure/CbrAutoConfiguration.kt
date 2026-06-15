@@ -11,7 +11,7 @@ import ru.cbr.adapter.client.CbrBankBicClient
 import ru.cbr.adapter.client.CbrInterbankCreditMarketClient
 import ru.cbr.adapter.client.CbrMetalClient
 import ru.cbr.adapter.client.CbrRatesClient
-import ru.cbr.adapter.config.CbrProperties
+import ru.cbr.adapter.configuration.CbrProperties
 import ru.cbr.adapter.parser.BankBicParser
 import ru.cbr.adapter.parser.CurrencyListParser
 import ru.cbr.adapter.parser.ExchangeRatesParser

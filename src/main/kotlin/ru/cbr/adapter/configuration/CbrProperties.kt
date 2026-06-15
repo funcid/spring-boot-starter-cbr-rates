@@ -1,4 +1,4 @@
-package ru.cbr.adapter.config
+package ru.cbr.adapter.configuration
 
 import org.springframework.boot.context.properties.ConfigurationProperties
 

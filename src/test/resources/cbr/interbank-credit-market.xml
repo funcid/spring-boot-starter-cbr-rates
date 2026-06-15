@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<InterestRateDynamics>
+  <Record Date="15.06.2024" Code="3">
+    <C1>16,00</C1>
+    <C7>16,10</C7>
+    <C30>-</C30>
+    <C90></C90>
+    <C180>16,50</C180>
+    <C360></C360>
+  </Record>
+  <Record Date="15.06.2024" Code="1">
+    <C1>10,00</C1>
+  </Record>
+</InterestRateDynamics>
