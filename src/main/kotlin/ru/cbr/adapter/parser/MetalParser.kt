@@ -43,7 +43,8 @@ class MetalParser : AbstractXmlParser() {
   private fun parseMetal(item: Element): Metal =
     Metal(
       date = parseDate(item.getAttribute("Date")),
-      code = getElementText(item, "Code"),
+      // Current CBR xml_metall.asp puts Code on the Record; older dumps used a child <Code>.
+      code = item.getAttribute("Code").ifBlank { getElementText(item, "Code") },
       buy = parseDecimal(getElementText(item, "Buy")),
       sell = parseDecimal(getElementText(item, "Sell")),
     )

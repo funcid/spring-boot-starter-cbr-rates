@@ -17,7 +17,8 @@ class CbrMetalClient(
    * Получить полный список металлов
    */
   fun getMetalList(): Collection<Metal> {
-    val from = formatDate(LocalDate.now().minusDays(3))
+    // CBR skips weekends/holidays; a short window can be empty around long breaks.
+    val from = formatDate(LocalDate.now().minusDays(14))
     val to = formatDate(LocalDate.now())
     return metalParser.parseMetalList(
       restTemplate.fetchXmlWithCorrectEncoding(

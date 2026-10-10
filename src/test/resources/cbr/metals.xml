@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="windows-1251"?>
-<Metall_Dynamics>
-  <Record Date="15.06.2024">
-    <Code>1</Code>
+<Metall FromDate="20241009" ToDate="20241010" name="Precious metals quotations">
+  <Record Date="10.10.2024" Code="1">
     <Buy>7500,50</Buy>
     <Sell>7600,00</Sell>
   </Record>
-</Metall_Dynamics>
+  <Record Date="10.10.2024" Code="2">
+    <Buy>90,10</Buy>
+    <Sell>91,20</Sell>
+  </Record>
+</Metall>
